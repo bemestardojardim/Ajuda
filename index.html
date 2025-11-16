@@ -131,6 +131,17 @@
             flex-shrink: 0;
         }
         
+        .checklist-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .checklist-text {
+            flex-grow: 1;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -205,6 +216,122 @@
             margin-top: 20px;
         }
         
+        /* Estilos para el mapa */
+        .map-container {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        
+        /* Estilos para botones */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            color: var(--text);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-icon {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+        }
+        
+        .btn-pdf {
+            background: #e53935;
+            margin-left: 10px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+        
+        .btn-pdf:hover {
+            background: #c62828;
+        }
+        
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.2rem;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+            background: var(--dark);
+        }
+        
         @media (max-width: 600px) {
             .location-info, .transport-options {
                 grid-template-columns: 1fr;
@@ -216,6 +343,30 @@
             
             section {
                 padding: 20px 15px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .floating-buttons {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .floating-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .checklist-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .btn-pdf {
+                margin-left: 0;
+                margin-top: 5px;
             }
         }
     </style>
@@ -269,6 +420,28 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="map-container">
+                <iframe 
+                    class="map-frame"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.984346665099!2d-44.26546772429413!3d-21.13803248052336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa1c7adb6d165c7%3A0x9e1c8c8c8c8c8c8c!2sRua%20Ministro%20Gabriel%20Passos%2C%20340%20-%20Centro%2C%20S%C3%A3o%20Jo%C3%A3o%20del-Rei%20-%20MG%2C%2036307-330%2C%20Brasil!5e0!3m2!1ses!2sar!4v1712345678901!5m2!1ses!2sar" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            <div class="button-group">
+                <a href="https://maps.google.com/?q=Rua+Ministro+Gabriel+Passos,+340+Centro+São+João+del-Rei+Brasil" target="_blank" class="btn">
+                    <span class="btn-icon">🗺️</span> Abrir en Google Maps
+                </a>
+                <a href="https://waze.com/ul?ll=-21.13803248052336,-44.26329307429413&navigate=yes" target="_blank" class="btn btn-secondary">
+                    <span class="btn-icon">🚗</span> Abrir en Waze
+                </a>
+                <button class="btn btn-accent" onclick="copyAddress()">
+                    <span class="btn-icon">📋</span> Copiar Dirección
+                </button>
+            </div>
         </section>
         
         <section>
@@ -276,20 +449,57 @@
             <div class="checklist">
                 <div class="checklist-item">
                     <div class="checklist-box"></div>
-                    <div><strong>Print del protocolo (Cód. 516479169)</strong> ← la pantalla que tenés</div>
+                    <div class="checklist-content">
+                        <div class="checklist-text">
+                            <strong>Print del protocolo (Cód. 516479169)</strong> ← la pantalla que tenés
+                        </div>
+                        <button class="btn btn-pdf" onclick="openPDF('cpf.pdf')">
+                            <span class="btn-icon">📄</span> Ver PDF
+                        </button>
+                    </div>
                 </div>
                 <div class="checklist-item">
                     <div class="checklist-box"></div>
-                    <div><strong>DNI original + 1 copia</strong></div>
+                    <div class="checklist-content">
+                        <div class="checklist-text">
+                            <strong>DNI original + 1 copia</strong>
+                        </div>
+                        <button class="btn btn-pdf" onclick="openPDF('DNI.pdf')">
+                            <span class="btn-icon">📄</span> Ver PDF
+                        </button>
+                    </div>
                 </div>
                 <div class="checklist-item">
                     <div class="checklist-box"></div>
-                    <div><strong>Cuenta de luz CEMIG</strong> (original o copia)</div>
+                    <div class="checklist-content">
+                        <div class="checklist-text">
+                            <strong>Cuenta de luz CEMIG</strong> (original o copia)
+                        </div>
+                        <button class="btn btn-pdf" onclick="openPDF('cemig.pdf')">
+                            <span class="btn-icon">📄</span> Ver PDF
+                        </button>
+                    </div>
                 </div>
                 <div class="checklist-item">
                     <div class="checklist-box"></div>
-                    <div><strong>Selfie con DNI abierto</strong> (impresa o en el celular)</div>
+                    <div class="checklist-content">
+                        <div class="checklist-text">
+                            <strong>Selfie con DNI abierto</strong> (impresa o en el celular)
+                        </div>
+                        <button class="btn btn-pdf" onclick="openPDF('selfie.pdf')">
+                            <span class="btn-icon">📄</span> Ver PDF
+                        </button>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-small" onclick="toggleChecklist()">
+                    <span class="btn-icon">✓</span> Marcar/Desmarcar Todo
+                </button>
+                <button class="btn btn-small btn-outline" onclick="printChecklist()">
+                    <span class="btn-icon">🖨️</span> Imprimir Checklist
+                </button>
             </div>
         </section>
         
@@ -338,6 +548,12 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <div class="button-group">
+                <button class="btn btn-small" onclick="copyPhrase()">
+                    <span class="btn-icon">📝</span> Copiar Frase en Portugués
+                </button>
+            </div>
         </section>
         
         <section>
@@ -356,6 +572,12 @@
                     <div>Preguntá a vecinos o en la iglesia</div>
                 </div>
             </div>
+            
+            <div class="button-group">
+                <button class="btn btn-small" onclick="setAlarm()">
+                    <span class="btn-icon">⏰</span> Recordatorio para salir
+                </button>
+            </div>
         </section>
         
         <section>
@@ -363,6 +585,12 @@
                 <h2>¡LISTO!</h2>
                 <p>Llegás 8h → salís 9h con <strong>CPF en la mano</strong>.</p>
                 <p>Después mandame: <strong>"¡Conseguí el CPF!"</strong></p>
+                
+                <div class="button-group" style="justify-content: center; margin-top: 15px;">
+                    <button class="btn btn-accent" onclick="sendMessage()">
+                        <span class="btn-icon">📱</span> Enviar mensaje
+                    </button>
+                </div>
             </div>
         </section>
         
@@ -370,5 +598,134 @@
             <p>Guía para obtener tu CPF - Brian</p>
         </footer>
     </div>
+    
+    <!-- Botones flotantes -->
+    <div class="floating-buttons">
+        <button class="floating-btn" onclick="scrollToTop()" title="Ir arriba">↑</button>
+        <button class="floating-btn" onclick="scrollToBottom()" title="Ir abajo">↓</button>
+        <button class="floating-btn" onclick="printPage()" title="Imprimir">🖨️</button>
+    </div>
+
+    <script>
+        // Función para abrir PDFs
+        function openPDF(filename) {
+            window.open(filename, '_blank');
+        }
+        
+        // Función para copiar la dirección al portapapeles
+        function copyAddress() {
+            const address = "Rua Ministro Gabriel Passos, 340 – Centro, São João del-Rei - MG, 36307-330";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("Dirección copiada al portapapeles");
+            });
+        }
+        
+        // Función para copiar la frase en portugués
+        function copyPhrase() {
+            const phrase = "Bom dia, vim concluir o CPF com o protocolo 516479169. Sou argentino, moro em São Tiago.";
+            navigator.clipboard.writeText(phrase).then(() => {
+                alert("Frase copiada al portapapeles");
+            });
+        }
+        
+        // Función para marcar/desmarcar todos los elementos del checklist
+        function toggleChecklist() {
+            const checkboxes = document.querySelectorAll('.checklist-box');
+            let allChecked = true;
+            
+            // Verificar si todos están marcados
+            checkboxes.forEach(box => {
+                if (!box.textContent) allChecked = false;
+            });
+            
+            // Marcar o desmarcar según el estado actual
+            checkboxes.forEach(box => {
+                if (allChecked) {
+                    box.textContent = '';
+                    box.style.backgroundColor = '';
+                    box.style.color = '';
+                } else {
+                    box.textContent = '✓';
+                    box.style.backgroundColor = '#4CAF50';
+                    box.style.color = 'white';
+                    box.style.textAlign = 'center';
+                    box.style.fontWeight = 'bold';
+                }
+            });
+        }
+        
+        // Función para imprimir la página
+        function printPage() {
+            window.print();
+        }
+        
+        // Función para imprimir solo el checklist
+        function printChecklist() {
+            const originalContent = document.body.innerHTML;
+            const checklistContent = document.querySelector('.checklist').outerHTML;
+            
+            document.body.innerHTML = `
+                <h1>Checklist para el CPF</h1>
+                ${checklistContent}
+                <p style="margin-top: 20px; font-style: italic;">Impreso el ${new Date().toLocaleDateString()}</p>
+            `;
+            
+            window.print();
+            document.body.innerHTML = originalContent;
+            window.location.reload();
+        }
+        
+        // Función para establecer un recordatorio
+        function setAlarm() {
+            const now = new Date();
+            const alarmTime = new Date();
+            alarmTime.setHours(5, 30, 0, 0); // 5:30 AM
+            
+            if (now > alarmTime) {
+                alarmTime.setDate(alarmTime.getDate() + 1);
+            }
+            
+            const timeDiff = alarmTime - now;
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            alert(`Recordatorio establecido para salir a las 6:30 AM (en ${hours}h ${minutes}m)`);
+        }
+        
+        // Función para enviar mensaje (simulación)
+        function sendMessage() {
+            alert("¡Mensaje enviado! (Simulación)\n\nContenido: ¡Conseguí el CPF!");
+        }
+        
+        // Funciones de navegación
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        // Permitir marcar elementos individuales del checklist
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.checklist-box');
+            
+            checkboxes.forEach(box => {
+                box.addEventListener('click', function() {
+                    if (this.textContent) {
+                        this.textContent = '';
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                    } else {
+                        this.textContent = '✓';
+                        this.style.backgroundColor = '#4CAF50';
+                        this.style.color = 'white';
+                        this.style.textAlign = 'center';
+                        this.style.fontWeight = 'bold';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
