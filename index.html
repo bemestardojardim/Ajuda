@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía para obtener tu CPF - Brian</title>
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #4CAF50;
+            --accent: #FFC107;
+            --light: #F1F8E9;
+            --dark: #1B5E20;
+            --text: #212121;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .checkmark {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        section {
+            padding: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 15px 0 10px;
+        }
+        
+        .location-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-icon {
+            background: var(--light);
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .checklist {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .checklist-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--light);
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .highlight {
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .quote {
+            background: #E8F5E9;
+            border-left: 4px solid var(--secondary);
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .transport-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .transport-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .transport-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .location-info, .transport-options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>¡BRIAN!</h1>
+            <p class="subtitle">
+                <span class="checkmark">✓</span> Ya mandé el e-mail
+            </p>
+            <p>Si querés <span class="highlight">IR PRESENCIAL</span> (más rápido: CPF en 1 hora), seguí este paso a paso y salís con el CPF en la mano.</p>
+        </header>
+        
+        <section>
+            <h2>📍 IR A LA RECEITA FEDERAL EN SÃO JOÃO DEL-REI (50 min de São Tiago)</h2>
+            <div class="location-info">
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <strong>Dirección:</strong><br>
+                        Rua Ministro Gabriel Passos, 340 – Centro
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🗺️</div>
+                    <div>
+                        <strong>CEP:</strong><br>
+                        36307-330
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div>
+                        <strong>Horario:</strong><br>
+                        8h a 14h (lunes a viernes)
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🚗</div>
+                    <div>
+                        <strong>Distancia:</strong><br>
+                        45 km (50 min en auto)
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <strong>Tel:</strong><br>
+                        (32) 3379-2700
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>1. QUÉ LLEVAR (4 cosas – prepará ahora)</h2>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checklist-box"></div>
+                    <div><strong>Print del protocolo (Cód. 516479169)</strong> ← la pantalla que tenés</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-box"></div>
+                    <div><strong>DNI original + 1 copia</strong></div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-box"></div>
+                    <div><strong>Cuenta de luz CEMIG</strong> (original o copia)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-box"></div>
+                    <div><strong>Selfie con DNI abierto</strong> (impresa o en el celular)</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>2. PASO A PASO EN LA AGENCIA (llegá a las 8h)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Qué hacer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>8:00</strong></td>
+                        <td>Entrá por la puerta principal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:05</strong></td>
+                        <td>Sacá <strong>número de atención</strong> en el tótem → elegí <strong>"CPF"</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:10</strong></td>
+                        <td>Esperá sentado (20 min)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:30</strong></td>
+                        <td>
+                            En el mostrador decí:
+                            <div class="quote">
+                                "Bom dia, vim concluir o CPF com o protocolo 516479169. Sou argentino, moro em São Tiago."
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:35</strong></td>
+                        <td>Entregá los 4 documentos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:40</strong></td>
+                        <td>Firmá el formulario</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:45</strong></td>
+                        <td><span class="highlight">¡CPF SALE EN EL MOMENTO!</span> → Te dan el papel con tu número</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2>3. CÓMO IR DESDE SÃO TIAGO</h2>
+            <div class="transport-options">
+                <div class="transport-card">
+                    <div class="transport-title">Auto</div>
+                    <div>50 min por BR-265 → estacioná en la calle (gratis)</div>
+                </div>
+                <div class="transport-card">
+                    <div class="transport-title">Ómnibus</div>
+                    <div>Salida 6:30 → llega 7:20 (Viação Presidente)</div>
+                </div>
+                <div class="transport-card">
+                    <div class="transport-title">Carona</div>
+                    <div>Preguntá a vecinos o en la iglesia</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="success-box">
+                <h2>¡LISTO!</h2>
+                <p>Llegás 8h → salís 9h con <strong>CPF en la mano</strong>.</p>
+                <p>Después mandame: <strong>"¡Conseguí el CPF!"</strong></p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Guía para obtener tu CPF - Brian</p>
+        </footer>
+    </div>
+</body>
+</html>
